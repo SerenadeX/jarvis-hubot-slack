@@ -17,7 +17,7 @@ module.exports = (robot) ->
     res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
 
 
-  robot.hear /pokedex ([1-9][0-9]*)/i
+  robot.hear /pokedex ([1-9][0-9]*)/i, (res) ->
     pokedex = res.match[1]
     pokedex.lookup pokedex, (responseString) ->
       res.send responseString
