@@ -1,6 +1,7 @@
 request = require 'request'
 
-apiString = "http://pokeapi.co/api/v1"
+host = "http://pokeapi.co"
+apiString = "#{host}/api/v1"
 
 module.exports = {
   lookup: (number, callback) ->
@@ -11,8 +12,21 @@ module.exports = {
       return callback "error getting string" if err or !res
       res = res.body
       resString = "##{res.national_id} #{res.name}: #{res.species}"
-      console.log(res)
-      callback(resString)
+      spriteApi = res.sprites[0].resource_uri
+
+      cb = (err, res) ->
+        console.log(err) if err
+        return callback "error getting string" if err or !res
+        res = res.body
+        resString += "\n #{host}#{res.image}"
+        callback(resString)
+
+      request {
+        url: "#{host}#{spriteApi}"
+        json: true
+      }, cb
+
+
 
     request {
       url: "#{apiString}/pokemon/#{number}"
