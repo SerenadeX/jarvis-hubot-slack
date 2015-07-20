@@ -18,8 +18,8 @@ module.exports = (robot) ->
 
 
   robot.hear /pokedex ([1-9][0-9]*)/i, (res) ->
-    pokedex = res.match[1]
-    pokedex.lookup pokedex, (responseString) ->
+    nubmer = res.match[1]
+    pokedex.lookup nubmer, (responseString) ->
       res.send responseString
 
   #

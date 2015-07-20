@@ -8,7 +8,11 @@ module.exports = {
     return callback "number is invalid.  try again" if (number > 772 or number < 1)
 
     cb = (err, res) ->
-      callback(err)
+      return callback "error getting string" if err or !res
+      res = res.body
+      resString = "##{res.national_id} #{res.name}: #{res.species}"
+      console.log(res)
+      callback(resString)
 
     request {
       url: "#{apiString}/pokemon/#{number}"
