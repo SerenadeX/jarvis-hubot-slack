@@ -6,7 +6,7 @@ apiString = "#{host}/api/v1"
 module.exports = {
   lookup: (number, callback) ->
 
-    return callback "number is invalid.  try again" if (number > 772 or number < 1)
+    return callback "number is invalid.  try again" if (number > 718 or number < 1)
 
     cb = (err, res) ->
       return callback "error getting string" if err or !res
