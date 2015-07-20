@@ -8,10 +8,20 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+
+pokedex = require './pokedex'
+
 module.exports = (robot) ->
 
   robot.hear /badger/i, (res) ->
     res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
+
+
+  robot.hear /pokedex ([1-9][0-9]*)/i
+    pokedex = res.match[1]
+    pokedex.lookup pokedex, (responseString) ->
+      res.send responseString
+
   #
   # robot.respond /open the (.*) doors/i, (res) ->
   #   doorType = res.match[1]
